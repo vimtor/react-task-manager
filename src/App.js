@@ -1,21 +1,45 @@
-import logo from "./logo.svg";
-import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [title, setTitle] = useState("");
+  const [tasks, setTasks] = useState([]);
+
+  const pendingTasks = tasks.length;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>Ya he hecho un cambio y he recargado</p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+    <div>
+      <h1>Task Manager</h1>
+      <p>Pending tasks: {pendingTasks}</p>
+      <div>
+        <input
+          type="text"
+          value={title}
+          onChange={(event) => {
+            setTitle(event.target.value);
+          }}
+        />
+        <button
+          onClick={() => {
+            setTasks([title, ...tasks]);
+            setTitle("");
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          Add
+        </button>
+      </div>
+      <ul>
+        {tasks.map((task) => {
+          return (
+            <li
+              onClick={() => {
+                setTasks(tasks.filter((t) => t !== task));
+              }}
+            >
+              {task}
+            </li>
+          );
+        })}
+      </ul>
     </div>
   );
 }
