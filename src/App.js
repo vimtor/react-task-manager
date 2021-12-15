@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 function App() {
   const [title, setTitle] = useState("");
@@ -27,7 +28,7 @@ function App() {
           Add
         </button>
       </div>
-      <ul>
+      <ul className="task-list">
         {tasks.map((task) => {
           return (
             <li
